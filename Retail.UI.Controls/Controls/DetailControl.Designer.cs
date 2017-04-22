@@ -94,7 +94,7 @@
             this.labelAmount.Name = "labelAmount";
             this.labelAmount.Size = new System.Drawing.Size(104, 20);
             this.labelAmount.TabIndex = 4;
-            this.labelAmount.Text = "Количество:";
+            this.labelAmount.Text = "Количество:";           
             // 
             // labelSumValue
             // 

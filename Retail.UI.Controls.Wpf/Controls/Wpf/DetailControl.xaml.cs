@@ -31,9 +31,9 @@ namespace Retail.UI.Controls.Wpf
         public new void SetAppearance(IAppearance appearance)
         {
             base.SetAppearance(appearance);
-        }
+        }      
 
-        public void SetProduct(Product product)
+        public void SetProduct(Product product, decimal amount, decimal sum)
         {
             //TODO Реализовать установку информации по текущему товару
         }

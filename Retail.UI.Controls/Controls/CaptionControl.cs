@@ -14,11 +14,22 @@ using Retail.UI.Theme;
 namespace Retail.UI.Controls
 {
     public partial class CaptionControl : BaseControl, ICaptionControl
-    {                  
+    {       
+           
         public CaptionControl()
         {
-            InitializeComponent();           
-        }      
+            InitializeComponent();       
+        }
+
+        #region Autowiring
+        /// <summary>
+        /// Доступ к контролу детализации по позиции чека
+        /// </summary>
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IDetailControl detailControl { get; set; }
+
+        #endregion
 
         public new void SetAppearance(IAppearance appearance)
         {
@@ -27,7 +38,7 @@ namespace Retail.UI.Controls
 
         private void butClose_Click(object sender, EventArgs e)
         {
-           Application.Close(true);
+           application.Close(true);
         }
        
     }

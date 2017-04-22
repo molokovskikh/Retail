@@ -12,7 +12,7 @@ namespace Retail.UI
         /// </summary>
         /// <param name="product">Товар для добавления</param>
         /// <param name="amount">Количество добавляемого товара (Может быть и отрицательное значение, ноль не обрабатывается)</param>
-        void AddProduct(Product product, int amount=1);
+        void AddProduct(Product product, decimal amount=1);
 
         /// <summary>
         /// Удалить из чека товар

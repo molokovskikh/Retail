@@ -8,8 +8,7 @@ namespace Retail.UI
     {
         /// <summary>
         /// Передать контролу информацию о текущей позиции в чеке
-        /// </summary>
-        /// <param name="product"></param>
-        void SetProduct(Product product);        
+        /// </summary>        
+        void SetProduct(Product product,decimal amount, decimal sum);        
     }
 }

@@ -16,7 +16,8 @@ namespace Retail.UI.Theme
         /// <returns></returns>
         public static IAppearance FindAppearance(this IDefaultControl Control, ITheme Theme)
         {
-            
+            if(Theme.Sets==null) return null;
+
             //Проходим весь набор форомлений для компонентов
             //Если находим подходящий для текущего элемента, то применяем его
             foreach (ControlType controlType in Theme.Sets.Keys)

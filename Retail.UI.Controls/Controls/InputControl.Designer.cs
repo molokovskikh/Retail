@@ -39,7 +39,7 @@
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox1.Location = new System.Drawing.Point(4, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(664, 38);
+            this.textBox1.Size = new System.Drawing.Size(734, 38);
             this.textBox1.TabIndex = 0;
             // 
             // InputControl
@@ -49,7 +49,6 @@
             this.AutoSize = true;
             this.Controls.Add(this.textBox1);
             this.Name = "InputControl";
-            this.Size = new System.Drawing.Size(671, 46);
             this.ResumeLayout(false);
             this.PerformLayout();
 

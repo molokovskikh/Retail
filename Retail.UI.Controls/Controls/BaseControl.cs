@@ -12,7 +12,17 @@ namespace Retail.UI.Controls
     /// Базовый компонент
     /// </summary>
     public partial class BaseControl : UserControl, IDefaultControl
-    {       
+    {
+
+        #region Autowiring
+
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IApplication application { get; set; }
+
+        #endregion
+
              
         public BaseControl()
         {                   
@@ -49,9 +59,6 @@ namespace Retail.UI.Controls
             //TODO Добавить обработку установки внешнего вида
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public IApplication Application { get; set; }    
-       
+      
     }
 }

@@ -15,7 +15,7 @@
         /// <summary>
         /// Закрыть чек
         /// </summary>
-        void Check();
+        void CheckOut();
 
         /// <summary>
         /// Печатать копию чека
@@ -33,5 +33,12 @@
         /// </summary>
         /// <param name="AnswerEnsure">Спрашивать об фверенности действия</param>
         void Close(bool AnswerEnsure = false);
+
+        void OpenBox();
+
+        void XReport();
+
+        void ZReport();
+        
     }
 }

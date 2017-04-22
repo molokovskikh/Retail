@@ -13,14 +13,9 @@ namespace Retail.UI.Themes.Default
         /// </summary>
         public IDictionary<ControlType, IAppearance> Sets
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-                throw new System.NotImplementedException();
-            }
+            //TODO Реализовать набор стилей для компонентов
+            get;
+            set;
         }
     }
 }

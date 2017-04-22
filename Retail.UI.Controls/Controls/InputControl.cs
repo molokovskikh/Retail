@@ -16,9 +16,22 @@ namespace Retail.UI.Controls
 {
     public partial class InputControl : BaseControl, IInputControl, IInitDevices
     {
+        #region Autowiring
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IProductRepository productRepository { get; set; }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IDocumentRepository documentRepository { get; set; }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IBarScanner barScanner { get; set; }
+
+        #endregion
+        
 
         public InputControl()
         {

@@ -1,21 +1,23 @@
-﻿using System.ComponentModel;
+﻿using Retail.UI.Theme;
+using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
+using System.Windows;
 using System.Windows.Forms.Integration;
 
 namespace Retail.UI.Controls
 {
     [Designer("System.Windows.Forms.Design.ControlDesigner, System.Design")]
     [DesignerSerializer("System.ComponentModel.Design.Serialization.TypeCodeDomSerializer , System.Design", "System.ComponentModel.Design.Serialization.CodeDomSerializer, System.Design")]        
-    public class TableControl : ElementHost, ITableControl
+    public class TableControl : BaseControl, ITableControl
     {
-        public TableControl()
-        {          
-            base.Child = new Wpf.TableControl();
+        protected override UIElement getWPFControl()
+        {
+            return new Wpf.TableControl();
         }
 
-        public void SetAppearance(Theme.IAppearance appearance)
+        public new void SetAppearance(IAppearance appearance)
         {
-            throw new System.NotImplementedException();
+            base.SetAppearance(appearance);
         }
 
         public void AddProduct(Models.Product product, int amount = 1)
@@ -24,6 +26,11 @@ namespace Retail.UI.Controls
         }
 
         public void DelProduct(Models.Product product)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void AddProduct(Models.Product product, decimal amount = 1)
         {
             throw new System.NotImplementedException();
         }

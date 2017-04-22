@@ -22,13 +22,12 @@ namespace Retail.UI.Controls
         public new void SetAppearance(IAppearance appearance)
         {
             base.SetAppearance(appearance);
-        }
+        }      
 
-
-
-        public void Calculate(IList<Product> products)
-        {
-            //TODO Сделать итог по чеку с отображением информации в контроле
+        public void Show(int numberPosition, decimal total)
+        {           
+            this.labelSumValue.Text = string.Format("{0:n2}", total);
+            this.labelNumberPositionValue.Text = string.Format("{0}", numberPosition);
         }
     }
 }

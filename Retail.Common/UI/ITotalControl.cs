@@ -8,8 +8,8 @@ namespace Retail.UI
     public interface ITotalControl : IDefaultControl
     {
         /// <summary>
-        /// Расчитать итог по чеку
-        /// </summary>
-        void Calculate(IList<Product> products);
+        /// Отобразить итог по чеку
+        /// </summary>        
+        void Show(int numberPosition, decimal total);
     }
 }

@@ -27,7 +27,7 @@ namespace Retail.UI.Controls
 
 
         public void OnInitDevices()
-        {           
+        {
         }
     }
 }

@@ -30,15 +30,17 @@ namespace Retail.UI.Controls.Wpf
         {
             base.SetAppearance(appearance);
         }
-
-        public void AddProduct(Models.Product product, int amount = 1)
+        
+        public void AddProduct(Models.Product product, decimal amount = 1)
         {
             throw new NotImplementedException();
         }
+
 
         public void DelProduct(Models.Product product)
         {
             throw new NotImplementedException();
         }
+
     }
 }

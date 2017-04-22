@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Retail.UI.Theme;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,12 +16,23 @@ namespace Retail.Main
         /// </summary>
         [STAThread]
         static void Main()
-        {            
+        {   
+            //Логер для служебных сообщений
             log4net.Config.XmlConfigurator.Configure();
+
+            //Инициализируем IoC контейнер
             var container = IoC.Container.Init(typeof(CashForm));                                  
+            
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            CashForm cashForm = container.Resolve<CashForm>();            
+            //Получим основное окно программы
+            CashForm cashForm = container.Resolve<CashForm>();
+
+            //Установим тему по умолчанию
+            ITheme defaultTheme = container.Resolve<ITheme>();
+            ThemeChangeCoordinator.ChangeTheme(defaultTheme);
+
             Application.Run(cashForm);
         }
     }

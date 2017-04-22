@@ -31,7 +31,9 @@ namespace Retail.UI.Controls.Wpf
             base.SetAppearance(appearance);
         }
 
-        public void Calculate(IList<Models.Product> products)
+
+
+        public void Show(int numberPosition, decimal total)
         {
             throw new NotImplementedException();
         }

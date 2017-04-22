@@ -1,6 +1,7 @@
 ﻿using Retail.UI;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 namespace Retail.Main
 {
     public class ApplicationContext: IApplication
-    {
+    {       
         Form form;
         public void SetMainForm(Form form)
         {
@@ -34,7 +35,7 @@ namespace Retail.Main
             //Если чек набран, то спросить нужно ли аннулировать текущий чек
         }
 
-        public void Check()
+        public void CheckOut()
         {
             //TODO Отбить чек, предварительно спросив ответ на действие
             //После инициализируется новый чек
@@ -49,5 +50,23 @@ namespace Retail.Main
         {
             //TODO Открыть окно поиска и подбора товаров для чека
         }
+
+
+        public void OpenBox()
+        {
+            //TODO Открыть ящик на кассе
+        }
+
+        public void XReport()
+        {
+           //TODO Печать X-Отчета
+        }
+
+        public void ZReport()
+        {
+            //TODO Печать Z-Отчета
+        }
+
+
     }
 }
