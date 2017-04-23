@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Db", "Db", "{089A80DF-650D-
 	ProjectSection(SolutionItems) = preProject
 		createDb.sql = createDb.sql
 		createTables.sql = createTables.sql
+		setup.cmd = setup.cmd
 		setupDb.cmd = setupDb.cmd
 		testData.sql = testData.sql
 	EndProjectSection
