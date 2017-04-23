@@ -201,13 +201,13 @@ namespace Retail.Main
             this.Controls.Add(this.tableControl1);
             this.Controls.Add(this.captionControl1);
             this.DoubleBuffered = true;
-         //   this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(1024, 605);
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-         //   this.TopMost = true;
+        //    this.TopMost = true;
             this.Load += new System.EventHandler(this.CashForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -217,7 +217,7 @@ namespace Retail.Main
        
         private void CashForm_Load(object sender, EventArgs e)
         {
-        //    this.WindowState = FormWindowState.Maximized;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         /// <summary>
