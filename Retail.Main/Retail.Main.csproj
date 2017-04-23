@@ -75,16 +75,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationContext.cs" />
-    <Compile Include="CashForm.cs">
+    <Compile Include="Actions\CheckOutAction.cs" />
+    <Compile Include="Actions\AmountForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CashForm.Designer.cs">
-      <DependentUpon>CashForm.cs</DependentUpon>
+    <Compile Include="Actions\AmountForm.Designer.cs">
+      <DependentUpon>AmountForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Actions\CashInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Actions\CashInForm.Designer.cs">
+      <DependentUpon>CashInForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Actions\NewDocumentAction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CashForm.resx">
-      <DependentUpon>CashForm.cs</DependentUpon>
+    <EmbeddedResource Include="Actions\AmountForm.resx">
+      <DependentUpon>AmountForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Actions\CashInForm.resx">
+      <DependentUpon>CashInForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

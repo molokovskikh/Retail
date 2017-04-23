@@ -42,5 +42,33 @@ namespace Retail.UI.Controls.Wpf
             throw new NotImplementedException();
         }
 
+
+
+        public IEnumerable<Device.ISaleItem> GetSaleItems()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public decimal GetAmountOfSelectedProduct()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetAmountOfSelectedProduct(decimal amount)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Models.Product GetSelectedProduct()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ClearDefault()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

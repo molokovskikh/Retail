@@ -9,6 +9,6 @@ namespace Retail.Repository
         /// Поиск товара(ов) по тексту/штрихкоду
         /// </summary>
         /// <param name="text">Текст с частью наименования или штрих-кодом товара</param>
-        IList<Product> FindByText(string text);
+        IList<Product> SearchByText(string text);
     }
 }

@@ -2,9 +2,11 @@
 using Moq;
 using Retail.Device;
 using Retail.UI;
+using Retail.UI.Actions;
 using System;
 using System.Configuration;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace Retail.IoC
 {
@@ -40,9 +42,16 @@ namespace Retail.IoC
             builder.RegisterType(typeMainForm).SingleInstance().PropertiesAutowired();            
 
             builder.RegisterAssemblyTypes(typeMainForm.Assembly)
-           .Where(t =>t.GetInterfaces().FirstOrDefault(i => i.Equals(typeof(IApplication))) != null)
-           .SingleInstance()
+           .Where(t =>t.GetInterfaces().FirstOrDefault(i => i.Equals(typeof(IApplication))) != null)           
            .As<IApplication>()
+           .SingleInstance()
+           .PropertiesAutowired();
+
+
+            builder.RegisterAssemblyTypes(typeMainForm.Assembly)
+            .Where(t => t.GetInterfaces().FirstOrDefault(i => i.Equals(typeof(IAction))) != null)          
+           .AsImplementedInterfaces()
+           .SingleInstance()
            .PropertiesAutowired();      
             
             //Зачитка строки подключения к БД из файла конфигурации

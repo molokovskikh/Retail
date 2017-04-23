@@ -21,13 +21,13 @@ namespace Retail.Main
             log4net.Config.XmlConfigurator.Configure();
 
             //Инициализируем IoC контейнер
-            var container = IoC.Container.Init(typeof(CashForm));                                  
+            var container = IoC.Container.Init(typeof(MainForm));                                  
             
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Получим основное окно программы
-            CashForm cashForm = container.Resolve<CashForm>();
+            MainForm cashForm = container.Resolve<MainForm>();
 
             //Установим тему по умолчанию
             ITheme defaultTheme = container.Resolve<ITheme>();

@@ -24,6 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Db", "Db", "{089A80DF-650D-
 		createDb.sql = createDb.sql
 		createTables.sql = createTables.sql
 		setupDb.cmd = setupDb.cmd
+		testData.sql = testData.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retail.UI.Controls.Wpf", "Retail.UI.Controls.Wpf\Retail.UI.Controls.Wpf.csproj", "{F4F8E9CC-A6A3-4305-9FC1-3A3353E1FB1E}"

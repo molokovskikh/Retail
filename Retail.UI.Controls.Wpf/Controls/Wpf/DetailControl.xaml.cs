@@ -37,5 +37,10 @@ namespace Retail.UI.Controls.Wpf
         {
             //TODO Реализовать установку информации по текущему товару
         }
+
+        public void ClearDefault()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

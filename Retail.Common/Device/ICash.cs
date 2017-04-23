@@ -17,7 +17,7 @@ namespace Retail.Device
         /// Продажа списка товаров
         /// </summary>
         /// <param name="items">Список товаров</param>
-        EventHandler Sell(IList<ISaleItem> items);
+        EventHandler Sell(IEnumerable<ISaleItem> items, decimal cashIn, decimal oddMoney);
 
         /// <summary>
         /// Снятие X-Отчета

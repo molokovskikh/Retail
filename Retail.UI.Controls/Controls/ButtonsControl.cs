@@ -45,6 +45,11 @@ namespace Retail.UI.Controls
             application.Search();
         }
 
+        private void butCashIn_Click(object sender, EventArgs e)
+        {
+            application.CashIn();
+        }
+
         private void butCheckout_Click(object sender, EventArgs e)
         {
             application.CheckOut();
@@ -155,6 +160,8 @@ namespace Retail.UI.Controls
                 }
             }           
         }
+
+       
 
         
 

@@ -16,7 +16,7 @@ namespace Retail.Repository.Impl
             this._dbConnection = dbConnection;          
         }
         
-        protected override IDbConnection getDbConnection()
+        protected override IDbConnection GetDbConnection()
         {
             return this._dbConnection;
         }
@@ -24,8 +24,23 @@ namespace Retail.Repository.Impl
         public override Store Find(int id)
         {
             return
-                DbORM.GetEntities<Store>(this.getDbConnection()).FirstOrDefault();
+                DbORM.GetEntities<Store>(this.GetDbConnection()).FirstOrDefault();
         }
-         
+
+
+        public decimal GetAmountOnStore(Product product)
+        {
+            return
+                DbORM.GetEntities<Product>(
+                this.GetDbConnection(),
+                string.Format(@"select sum(amount) Price from productonstore where product_id = {0}",product.Id)
+                )
+                .Select<Product,decimal>(p=>p.Price).FirstOrDefault();
+        }
+
+        public new System.Collections.IEnumerator GetEnumerator()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -14,11 +14,11 @@ namespace Retail.UI.Controls
         
         public BaseControl()
         {          
-            base.Child = this.getWPFControl();
+            base.Child = this.GetWPFControl();
             this.WPFControl = base.Child as IDefaultControl;
         }
 
-        protected abstract UIElement getWPFControl();
+        protected abstract UIElement GetWPFControl();
         
         public void SetAppearance(IAppearance appearance)
         {

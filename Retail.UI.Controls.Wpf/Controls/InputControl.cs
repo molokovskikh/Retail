@@ -15,9 +15,20 @@ namespace Retail.UI.Controls
             throw new System.NotImplementedException();
         }
 
-        protected override UIElement getWPFControl()
+        protected override UIElement GetWPFControl()
         {
             return new Wpf.InputControl();
+        }
+
+        public void AddChar(char ch)
+        {
+            throw new System.NotImplementedException();
+        }
+
+
+        public void ClearDefault()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

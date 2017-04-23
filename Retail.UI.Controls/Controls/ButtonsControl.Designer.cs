@@ -36,6 +36,7 @@
             this.butCopy = new System.Windows.Forms.Button();
             this.butXReport = new System.Windows.Forms.Button();
             this.butZReport = new System.Windows.Forms.Button();
+            this.butCashIn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // butOpenBox
@@ -47,12 +48,12 @@
             this.butOpenBox.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.butOpenBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.butOpenBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.butOpenBox.Location = new System.Drawing.Point(426, 3);
+            this.butOpenBox.Location = new System.Drawing.Point(540, 3);
             this.butOpenBox.Name = "butOpenBox";
             this.butOpenBox.Size = new System.Drawing.Size(88, 57);
             this.butOpenBox.TabIndex = 5;
-            this.butOpenBox.Tag = "F6";
-            this.butOpenBox.Text = "F6   Ящик";
+            this.butOpenBox.Tag = "F7";
+            this.butOpenBox.Text = "F7   Ящик";
             this.butOpenBox.UseVisualStyleBackColor = true;
             this.butOpenBox.Click += new System.EventHandler(this.butOpenBox_Click);
             // 
@@ -118,12 +119,12 @@
             this.butCheckout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.butCheckout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.butCheckout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.butCheckout.Location = new System.Drawing.Point(275, 3);
+            this.butCheckout.Location = new System.Drawing.Point(389, 3);
             this.butCheckout.Name = "butCheckout";
             this.butCheckout.Size = new System.Drawing.Size(69, 57);
             this.butCheckout.TabIndex = 3;
-            this.butCheckout.Tag = "F4";
-            this.butCheckout.Text = "F4   Чек";
+            this.butCheckout.Tag = "F5";
+            this.butCheckout.Text = "F5   Чек";
             this.butCheckout.UseVisualStyleBackColor = true;
             this.butCheckout.Click += new System.EventHandler(this.butCheckout_Click);
             // 
@@ -136,12 +137,12 @@
             this.butCopy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.butCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.butCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.butCopy.Location = new System.Drawing.Point(349, 3);
+            this.butCopy.Location = new System.Drawing.Point(463, 3);
             this.butCopy.Name = "butCopy";
             this.butCopy.Size = new System.Drawing.Size(74, 57);
             this.butCopy.TabIndex = 4;
-            this.butCopy.Tag = "F5";
-            this.butCopy.Text = "F5   Копия";
+            this.butCopy.Tag = "F6";
+            this.butCopy.Text = "F6   Копия";
             this.butCopy.UseVisualStyleBackColor = true;
             this.butCopy.Click += new System.EventHandler(this.butCopy_Click);
             // 
@@ -154,12 +155,12 @@
             this.butXReport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.butXReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.butXReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.butXReport.Location = new System.Drawing.Point(519, 3);
+            this.butXReport.Location = new System.Drawing.Point(631, 3);
             this.butXReport.Name = "butXReport";
             this.butXReport.Size = new System.Drawing.Size(97, 57);
             this.butXReport.TabIndex = 6;
-            this.butXReport.Tag = "F7";
-            this.butXReport.Text = "F7   X-Отчет";
+            this.butXReport.Tag = "F8";
+            this.butXReport.Text = "F8   X-Отчет";
             this.butXReport.UseVisualStyleBackColor = true;
             this.butXReport.Click += new System.EventHandler(this.butXReport_Click);
             // 
@@ -172,7 +173,7 @@
             this.butZReport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.butZReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.butZReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.butZReport.Location = new System.Drawing.Point(622, 3);
+            this.butZReport.Location = new System.Drawing.Point(732, 3);
             this.butZReport.Name = "butZReport";
             this.butZReport.Size = new System.Drawing.Size(116, 57);
             this.butZReport.TabIndex = 7;
@@ -181,10 +182,29 @@
             this.butZReport.UseVisualStyleBackColor = true;
             this.butZReport.Click += new System.EventHandler(this.butZReport_Click);
             // 
+            // butCashIn
+            // 
+            this.butCashIn.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.butCashIn.FlatAppearance.BorderColor = System.Drawing.Color.Navy;
+            this.butCashIn.FlatAppearance.BorderSize = 2;
+            this.butCashIn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.butCashIn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.butCashIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butCashIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.butCashIn.Location = new System.Drawing.Point(274, 3);
+            this.butCashIn.Name = "butCashIn";
+            this.butCashIn.Size = new System.Drawing.Size(112, 57);
+            this.butCashIn.TabIndex = 8;
+            this.butCashIn.Tag = "F4";
+            this.butCashIn.Text = "F4  Наличные";
+            this.butCashIn.UseVisualStyleBackColor = true;
+            this.butCashIn.Click += new System.EventHandler(this.butCashIn_Click);
+            // 
             // ButtonsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.butCashIn);
             this.Controls.Add(this.butOpenBox);
             this.Controls.Add(this.butHelp);
             this.Controls.Add(this.butNew);
@@ -209,5 +229,6 @@
         private System.Windows.Forms.Button butNew;
         private System.Windows.Forms.Button butHelp;
         private System.Windows.Forms.Button butOpenBox;
+        private System.Windows.Forms.Button butCashIn;
     }
 }

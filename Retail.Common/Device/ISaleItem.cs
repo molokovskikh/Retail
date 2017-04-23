@@ -6,18 +6,23 @@
     public interface ISaleItem
     {
         /// <summary>
+        /// Идентификатор
+        /// </summary>
+        int Id { get; } 
+
+        /// <summary>
         /// Наименование
         /// </summary>
-        string Name { get; set; }        
+        string Name { get; }        
 
         /// <summary>
         /// Цена
         /// </summary>
-        decimal Price { get; set; }
+        decimal Price { get; }
 
         /// <summary>
         /// Количество
         /// </summary>
-        decimal Amount { get; set; }
+        decimal Amount { get; }
     }
 }

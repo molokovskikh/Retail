@@ -16,7 +16,7 @@ namespace Retail.Repository.Impl
             this._dbConnection = dbConnection;          
         }
 
-        protected override IDbConnection getDbConnection()
+        protected override IDbConnection GetDbConnection()
         {
             return this._dbConnection;
         }
@@ -24,7 +24,7 @@ namespace Retail.Repository.Impl
         public override Classifier Find(int id)
         {
             return
-                DbORM.GetEntities<Classifier>(this.getDbConnection(),
+                DbORM.GetEntities<Classifier>(this.GetDbConnection(),
                 string.Format(@"select * from Classifier where Id={0}",id)
                 ).FirstOrDefault();
         }

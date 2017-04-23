@@ -16,7 +16,7 @@ namespace Retail.Repository.Impl
             this._dbConnection = dbConnection;          
         }
 
-        protected override IDbConnection getDbConnection()
+        protected override IDbConnection GetDbConnection()
         {
             return this._dbConnection;
         }

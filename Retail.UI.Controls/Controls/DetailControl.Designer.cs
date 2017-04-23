@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.labelCode = new System.Windows.Forms.Label();
             this.labelCodeValue = new System.Windows.Forms.Label();
             this.labelPriceValue = new System.Windows.Forms.Label();
@@ -37,6 +38,7 @@
             this.labelSumValue = new System.Windows.Forms.Label();
             this.labelSum = new System.Windows.Forms.Label();
             this.labelFullName = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // labelCode
@@ -94,7 +96,7 @@
             this.labelAmount.Name = "labelAmount";
             this.labelAmount.Size = new System.Drawing.Size(104, 20);
             this.labelAmount.TabIndex = 4;
-            this.labelAmount.Text = "Количество:";           
+            this.labelAmount.Text = "Количество:";
             // 
             // labelSumValue
             // 
@@ -130,6 +132,10 @@
             this.labelFullName.TabIndex = 8;
             this.labelFullName.Text = "Вкусное мороженко";
             // 
+            // toolTip1
+            // 
+            this.toolTip1.IsBalloon = true;
+            // 
             // DetailControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -160,5 +166,6 @@
         private System.Windows.Forms.Label labelSumValue;
         private System.Windows.Forms.Label labelSum;
         private System.Windows.Forms.Label labelFullName;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

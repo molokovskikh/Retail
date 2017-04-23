@@ -36,6 +36,10 @@
             this.labelNumberPositionValue = new System.Windows.Forms.Label();
             this.labelSum = new System.Windows.Forms.Label();
             this.labelSumValue = new System.Windows.Forms.Label();
+            this.labelOddMoney = new System.Windows.Forms.Label();
+            this.labelOddMoneyValue = new System.Windows.Forms.Label();
+            this.labelCashIn = new System.Windows.Forms.Label();
+            this.labelCashInValue = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelDoc
@@ -103,7 +107,7 @@
             this.labelSum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSum.AutoSize = true;
             this.labelSum.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSum.Location = new System.Drawing.Point(471, 0);
+            this.labelSum.Location = new System.Drawing.Point(792, 0);
             this.labelSum.Name = "labelSum";
             this.labelSum.Size = new System.Drawing.Size(267, 31);
             this.labelSum.TabIndex = 6;
@@ -111,21 +115,70 @@
             // 
             // labelSumValue
             // 
-            this.labelSumValue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelSumValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSumValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSumValue.Location = new System.Drawing.Point(395, 29);
+            this.labelSumValue.Location = new System.Drawing.Point(741, 29);
             this.labelSumValue.Name = "labelSumValue";
             this.labelSumValue.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.labelSumValue.Size = new System.Drawing.Size(343, 65);
+            this.labelSumValue.Size = new System.Drawing.Size(318, 65);
             this.labelSumValue.TabIndex = 7;
             this.labelSumValue.Text = "190.00";
+            // 
+            // labelOddMoney
+            // 
+            this.labelOddMoney.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelOddMoney.AutoSize = true;
+            this.labelOddMoney.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelOddMoney.Location = new System.Drawing.Point(467, 54);
+            this.labelOddMoney.Name = "labelOddMoney";
+            this.labelOddMoney.Size = new System.Drawing.Size(114, 33);
+            this.labelOddMoney.TabIndex = 8;
+            this.labelOddMoney.Text = "Сдача:";
+            // 
+            // labelOddMoneyValue
+            // 
+            this.labelOddMoneyValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelOddMoneyValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelOddMoneyValue.ForeColor = System.Drawing.Color.MediumBlue;
+            this.labelOddMoneyValue.Location = new System.Drawing.Point(571, 50);
+            this.labelOddMoneyValue.Name = "labelOddMoneyValue";
+            this.labelOddMoneyValue.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.labelOddMoneyValue.Size = new System.Drawing.Size(166, 41);
+            this.labelOddMoneyValue.TabIndex = 9;
+            this.labelOddMoneyValue.Text = "1.11";
+            // 
+            // labelCashIn
+            // 
+            this.labelCashIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelCashIn.AutoSize = true;
+            this.labelCashIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelCashIn.Location = new System.Drawing.Point(420, 5);
+            this.labelCashIn.Name = "labelCashIn";
+            this.labelCashIn.Size = new System.Drawing.Size(159, 31);
+            this.labelCashIn.TabIndex = 12;
+            this.labelCashIn.Text = "Наличные:";
+            // 
+            // labelCashInValue
+            // 
+            this.labelCashInValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelCashInValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelCashInValue.ForeColor = System.Drawing.Color.DarkRed;
+            this.labelCashInValue.Location = new System.Drawing.Point(571, 6);
+            this.labelCashInValue.Name = "labelCashInValue";
+            this.labelCashInValue.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.labelCashInValue.Size = new System.Drawing.Size(164, 33);
+            this.labelCashInValue.TabIndex = 13;
+            this.labelCashInValue.Text = "20000,00";
             // 
             // TotalControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.labelCashIn);
+            this.Controls.Add(this.labelCashInValue);
+            this.Controls.Add(this.labelOddMoney);
+            this.Controls.Add(this.labelOddMoneyValue);
             this.Controls.Add(this.labelSum);
             this.Controls.Add(this.labelNumberPositionValue);
             this.Controls.Add(this.labelDocNumValue);
@@ -135,7 +188,7 @@
             this.Controls.Add(this.labelDoc);
             this.Controls.Add(this.labelSumValue);
             this.Name = "TotalControl";
-            this.Size = new System.Drawing.Size(741, 101);
+            this.Size = new System.Drawing.Size(1062, 101);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,5 +204,9 @@
         private System.Windows.Forms.Label labelNumberPositionValue;
         private System.Windows.Forms.Label labelSum;
         private System.Windows.Forms.Label labelSumValue;
+        private System.Windows.Forms.Label labelOddMoney;
+        private System.Windows.Forms.Label labelOddMoneyValue;
+        private System.Windows.Forms.Label labelCashIn;
+        private System.Windows.Forms.Label labelCashInValue;
     }
 }

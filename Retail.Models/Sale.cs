@@ -1,8 +1,10 @@
-﻿namespace Retail.Models
+﻿using Retail.MicroORM.DataAnnotations;
+namespace Retail.Models
 {
     /// <summary>
     /// Продажи товаров
     /// </summary>
+    [TableName("saleofprofuct")]
     public class Sale
     {
         /// <summary>
@@ -18,11 +20,6 @@
         /// <summary>
         /// Количество проданного товара
         /// </summary>
-        public decimal Amount { get; set; }
-
-        /// <summary>
-        /// Оператор продавший товар
-        /// </summary>
-        public User User { get; set; }
+        public decimal Amount { get; set; }      
     }
 }

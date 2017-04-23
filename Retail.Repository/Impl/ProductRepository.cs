@@ -16,7 +16,7 @@ namespace Retail.Repository.Impl
             this._dbConnection = dbConnection;          
         }
 
-        protected override IDbConnection getDbConnection()
+        protected override IDbConnection GetDbConnection()
         {
             return this._dbConnection;
         }
@@ -24,27 +24,33 @@ namespace Retail.Repository.Impl
         public override Product Find(int id)
         {
             return
-                DbORM.GetEntities<Product>(this.getDbConnection()).FirstOrDefault();
+                DbORM.GetEntities<Product>(this.GetDbConnection()).FirstOrDefault();
         }
 
-        public IList<Product> FindByText(string text)
+        public IList<Product> SearchByText(string text)
         {
             string query =  string.Format(
-@"select p.*,pc.name classifier_name from Product p 
+@"select p.id Id,p.price Price,pc.name classifier_name from Product p 
 inner join Classifier pc on pc.id = p.classifier_id
 where
+exists(select ps.product_id from productonstore ps where ps.product_id = p.id and ps.amount > 1) and 
 exists(select id from Classifier c where 
-            ( c.Name ilike '%{0}%' or (exists(select * from BarCode b where b.classifier_id=c.id and b.code = '{0}') )
+            ( c.Name like '%{0}%' or (exists(select * from BarCode b where b.classifier_id=c.id and b.code = '{0}') )
        ) and p.classifier_id = c.id)", 
             text);
 
-            return DbORM.GetEntities<Product>(this.getDbConnection(), query,  (product, column, value) =>
+            return DbORM.GetEntities<Product>(this.GetDbConnection(), query,  (product, column, value) =>
             {
                 if ("classifier_name".Equals(column.ToLower()))
                 {
                     product.Classifier = product.Classifier ?? new Classifier() { Name = value as string };                    
                 }
-            });
+            },
+              (typeDst,src) => 
+                  typeDst.Equals(typeof(decimal)) && (src is long||src is int) 
+                  ? ((long)src) / 10000m 
+                  : src
+            );
         }
 
       

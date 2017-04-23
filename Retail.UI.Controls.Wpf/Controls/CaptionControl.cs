@@ -15,7 +15,7 @@ namespace Retail.UI.Controls
             throw new System.NotImplementedException();
         }
 
-        protected override UIElement getWPFControl()
+        protected override UIElement GetWPFControl()
         {
             return new Wpf.CaptionControl();
         }

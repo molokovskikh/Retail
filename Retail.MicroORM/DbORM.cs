@@ -43,7 +43,7 @@ namespace Retail.MicroORM
             System.Reflection.PropertyInfo[] pis = t_entity.GetProperties();
             System.Reflection.PropertyInfo keyProperty = pis.Where(pi => pi.GetCustomAttributes(typeof(DataAnnotations.KeyAttribute), true).Count() > 0).FirstOrDefault();
             keyProperty = keyProperty ?? pis.Where(pi => "id".Equals(pi.Name.ToLower())).FirstOrDefault();
-            keyProperty = string.IsNullOrEmpty(keyProperty.Name) ? null : keyProperty;
+            keyProperty = keyProperty==null || string.IsNullOrEmpty(keyProperty.Name) ? null : keyProperty;
             return keyProperty != null ? keyProperty.Name : string.Empty;
         }
 
@@ -60,7 +60,7 @@ namespace Retail.MicroORM
             System.Reflection.PropertyInfo[] pis = t_entity.GetProperties();
             System.Reflection.PropertyInfo keyProperty = pis.Where(pi => pi.GetCustomAttributes(typeof(DataAnnotations.KeyAttribute), true).Count() > 0).FirstOrDefault();
             keyProperty = keyProperty ?? pis.Where(pi => "id".Equals(pi.Name.ToLower())).FirstOrDefault();
-            keyProperty = string.IsNullOrEmpty(keyProperty.Name) ? null : keyProperty;
+            keyProperty = keyProperty == null || string.IsNullOrEmpty(keyProperty.Name) ? null : keyProperty;
             
             return keyProperty != null ? (int)keyProperty.GetValue(entity,null) : 0;
         }
@@ -230,8 +230,15 @@ namespace Retail.MicroORM
             {
                 if (m.Success)
                 {
-                    result += Template.Substring(prev, m.Index);
+                    result += Template.Substring(prev, m.Index-prev);
                     var pe = pis.Where(w => w.Name.Equals(m.Groups["val"].Value));
+                                        
+                    pe = pe.Count() == 0  ? pis.Where(w => 
+                        {
+                         DataAnnotations.DisplayColumnAttribute da = w.GetCustomAttributes(typeof(DataAnnotations.DisplayColumnAttribute), true).FirstOrDefault() as DataAnnotations.DisplayColumnAttribute;
+                         return da != null && da.DisplayColumn.Equals(m.Groups["val"].Value);
+                        }) : pe;                    
+
                     if (pe.Count() > 0)
                         result += _left_right_ByType(pe.First().GetValue(entity,null));
                     else
@@ -252,8 +259,9 @@ namespace Retail.MicroORM
       /// <param name="QueryText">Текст SQL-запроса. Не обязателен (вычисляется на основании модели)</param>      
       /// <param name="customHandler">Произвольный обработчик результата (entity,columnName,value)</param>
       /// <param name="entityKey">Сущность-Ключ, если необходимо получить единственную сущность</param>
+      /// <param name="converterValue">Кастомный конвертер значений Сигнатура  (Type typeDst, object valueSrc)</param>
       /// <returns>Список сущностей</returns>
-        public static IList<T> GetEntities<T>(IDbConnection conn,string QueryText=null, Action<T,string,object> customHandler=null, T entityKey=default(T))
+        public static IList<T> GetEntities<T>(IDbConnection conn,string QueryText=null, Action<T, string, object> customHandler=null, Func<Type,object,object> converterValue = null, T entityKey=default(T))
         {
             List<T> result = new List<T>();
             using (conn)//Учтем неуправляемые ресурсы
@@ -282,7 +290,9 @@ namespace Retail.MicroORM
                             if (pi.Count() > 0) //Если имя поля результата совпало со свойством модели
                             {
                                 entity = entity == null ? ((T)Activator.CreateInstance(typeof(T))) : entity;
-                                pi.First().SetValue(entity, rd.GetValue(f),null);
+                                var fpi = pi.First();
+                                var value = converterValue !=null ? converterValue(fpi.PropertyType, rd.GetValue(f)): rd.GetValue(f);
+                                fpi.SetValue(entity, value, null);
                             }
                             else
                             {
@@ -295,7 +305,9 @@ namespace Retail.MicroORM
                                 if (pi.Count() > 0)
                                 {
                                     entity = entity == null ? ((T)Activator.CreateInstance(typeof(T))) : entity;
-                                    pi.First().SetValue(entity, rd.GetValue(f),null);
+                                    var fpi = pi.First();
+                                    var value = converterValue != null ? converterValue(fpi.PropertyType, rd.GetValue(f)) : rd.GetValue(f);
+                                    fpi.SetValue(entity, value, null);                                    
                                 }
                                 else if (customHandler != null)
                                 {
@@ -313,7 +325,6 @@ namespace Retail.MicroORM
             return result;
         }
 
-
         /// <summary>
         /// Обновляет записи в БД
         /// </summary>
@@ -321,8 +332,9 @@ namespace Retail.MicroORM
         /// <param name="entities">Список обновляемы объектов</param>
         /// <param name="conn">Подключение к БД</param>
         /// <param name="InsertOrUpdateText">SQL запрос на добавление или обновление данных(если не указан, то формируется ORM, на основании декларации модели и текущего состояния каждого объекта коллекции)</param>
+        /// <param name="converterValue">Кастомный конвертер значений Сигнатура  (Type typeDst, object valueSrc)</param>
         /// <returns>Список вставленных и обновленых сущностей</returns>
-         public static IList<T> PutEntities<T>(ICollection<T> entities,IDbConnection conn,string InsertOrUpdateOrDeleteTemplate=null)
+         public static IList<T> PutEntities<T>(ICollection<T> entities,IDbConnection conn,string InsertOrUpdateOrDeleteTemplate=null,Func<Type,object,object> converterValue = null)
          {
             List<T> result = new List<T>();
             if (entities == null && entities.Count == 0) return result;
@@ -347,21 +359,26 @@ namespace Retail.MicroORM
                                 _genQueryUpdate(_entity,tableName) :
                                 key < 0 ? _genQueryDelete(_entity,tableName) : _genQueryInsert(_entity,tableName)
                         ) :
-                        InsertOrUpdateOrDeleteTemplate;
+                        ApplyTemplate(InsertOrUpdateOrDeleteTemplate,_entity);
 
                     //Если текст запроса пустой то сгенерируем его
                     cmd.CommandText = InsertOrUpdateOrDeleteTemplate;
-                    int _RowAffected =cmd.ExecuteNonQuery();
+                     int _RowAffected =cmd.ExecuteNonQuery();
 
                     //Если обновление или вставка
                     if (_RowAffected > 0 && key>=0)
                     {
 
                         if (key == 0)//Если вставка данных                        
-                            cmd.CommandText = string.Format("SELECT TOP 1 * FROM {0} ORDER BY {1} DESC",tableName,keyName);
-                        else 
+                        {
+                            cmd.CommandText = 
+                                string.IsNullOrEmpty(keyName)
+                                ? string.Format("SELECT * FROM {0} LIMIT 1", tableName)
+                                : string.Format("SELECT * FROM {0} ORDER BY {1} DESC LIMIT 1", tableName, keyName);
+                        }
+                        else
                             if (key > 0)//Иначе обновление                        
-                            cmd.CommandText = string.Format("SELECT * FROM {0} WHERE {1}={2}", tableName, keyName,key);
+                                cmd.CommandText = string.Format("SELECT * FROM {0} WHERE {1}={2}", tableName, keyName, key);
 
                         System.Reflection.PropertyInfo[] pis = _entity.GetType().GetProperties();
 
@@ -381,8 +398,10 @@ namespace Retail.MicroORM
 
                                     if (pi.Count() > 0) //Если имя поля результата совпало со свойством модели
                                     {
-                                        entity = entity == null ? ((T)Activator.CreateInstance(typeof(T))) : entity;
-                                        pi.First().SetValue(entity, rd.GetValue(f),null);
+                                        entity = entity == null ? ((T)Activator.CreateInstance(typeof(T))) : entity;                                        
+                                        var fpi = pi.First();
+                                        var value = converterValue != null ? converterValue(fpi.PropertyType, rd.GetValue(f)) : rd.GetValue(f);
+                                        fpi.SetValue(entity, value, null);      
                                     }
                                     else
                                     {
@@ -395,7 +414,9 @@ namespace Retail.MicroORM
                                         if (pi.Count() > 0)
                                         {
                                             entity = entity == null ? ((T)Activator.CreateInstance(typeof(T))) : entity;
-                                            pi.First().SetValue(entity, rd.GetValue(f),null);
+                                            var fpi = pi.First();
+                                            var value = converterValue != null ? converterValue(fpi.PropertyType, rd.GetValue(f)) : rd.GetValue(f);
+                                            fpi.SetValue(entity, value, null);      
                                         }
                                     }
                                 }

@@ -15,7 +15,7 @@ namespace Retail.UI.Controls
             base.SetAppearance(appearance);
         }
 
-        protected override UIElement getWPFControl()
+        protected override UIElement GetWPFControl()
         {
             return new Wpf.StatusControl();
         }

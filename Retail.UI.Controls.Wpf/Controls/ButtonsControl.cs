@@ -10,7 +10,7 @@ namespace Retail.UI.Controls
     public class ButtonsControl : BaseControl, IButtonsControl
     {
        
-        protected override UIElement getWPFControl()
+        protected override UIElement GetWPFControl()
         {
             return new Wpf.ButtonsControl();
         }

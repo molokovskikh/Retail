@@ -50,7 +50,13 @@
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\ISaleRepository.cs" />
     <Compile Include="Repository\IStoreRepository.cs" />
+    <Compile Include="UI\Actions\IAction.cs" />
+    <Compile Include="UI\Actions\IAddAmountAction.cs" />
+    <Compile Include="UI\Actions\ICheckoutAction.cs" />
+    <Compile Include="UI\Actions\IInFormAction.cs" />
+    <Compile Include="UI\Actions\INewDocumentAction.cs" />
     <Compile Include="UI\IApplication.cs" />
+    <Compile Include="UI\Actions\ICashInAction.cs" />
     <Compile Include="UI\IShortcutKeyManager.cs" />
     <Compile Include="UI\IStatusControl.cs" />
     <Compile Include="UI\IButtonsControl.cs" />

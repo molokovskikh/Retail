@@ -9,7 +9,7 @@ namespace Retail.UI.Controls
     [DesignerSerializer("System.ComponentModel.Design.Serialization.TypeCodeDomSerializer , System.Design", "System.ComponentModel.Design.Serialization.CodeDomSerializer, System.Design")]        
     public class TotalControl : BaseControl, ITotalControl
     {
-        protected override UIElement getWPFControl()
+        protected override UIElement GetWPFControl()
         {
             return new Wpf.TotalControl();
         }
@@ -21,7 +21,34 @@ namespace Retail.UI.Controls
 
         public void Show(int numberPosition, decimal total)
         {
-            (getWPFControl() as ITotalControl).Show(numberPosition,total);
+            (GetWPFControl() as ITotalControl).Show(numberPosition,total);
+        }
+
+
+        public decimal GetTotal()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ShowOddMoney(decimal cashIn)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void SetDocument(Models.Document document)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ClearDefault()
+        {
+            throw new System.NotImplementedException();
+        }
+
+
+        public decimal GetCashIn()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

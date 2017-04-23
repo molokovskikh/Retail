@@ -99,7 +99,7 @@
             this.dataGridViewProducts.Size = new System.Drawing.Size(741, 220);
             this.dataGridViewProducts.StandardTab = true;
             this.dataGridViewProducts.TabIndex = 0;
-            this.dataGridViewProducts.SelectionChanged += new System.EventHandler(this.dataGridViewProducts_SelectionChanged);
+            this.dataGridViewProducts.SelectionChanged += new System.EventHandler(this.dataGridViewProducts_SelectionChanged);            
             // 
             // Product
             // 

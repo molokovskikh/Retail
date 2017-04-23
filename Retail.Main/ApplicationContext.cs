@@ -1,21 +1,41 @@
-﻿using Retail.UI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Autofac;
+using Retail.UI;
+using Retail.UI.Actions;
+using Retail.Device;
+using Retail.Models;
+using Retail.Repository;
 
 namespace Retail.Main
 {
     public class ApplicationContext: IApplication
-    {       
+    {
         Form form;
         public void SetMainForm(Form form)
         {
             this.form = form;
-        }       
+        }
+
+        public Form GetMainForm()
+        {
+            return this.form;
+        }
+
+        /// <summary>
+        /// Получить экземпляр объекта из IoC контейнера
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        private T GetInstance<T>()
+        {
+            return IoC.Container.Instance.Resolve<T>();
+        }
 
         public void Close(bool AnswerEnsure = false)
         {
@@ -28,17 +48,56 @@ namespace Retail.Main
         {
            //TODO Реализовать окно справки
         }
-
-        public void New()
+     
+        public void New(bool silent=false)
         {
-            //TODO Реализовать открытие чека
-            //Если чек набран, то спросить нужно ли аннулировать текущий чек
+            if (!silent)
+            {
+                ITableControl tableControl = GetInstance<ITableControl>();
+                if (tableControl.GetSelectedProduct() != null)
+                {
+                    if (MessageBox.Show(this.form, "Чек не пустой!\nХотите его очистить?", "Очистка чека!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        ITotalControl totalControl = GetInstance<ITotalControl>();
+                        IDetailControl detailControl = GetInstance<IDetailControl>();
+                        totalControl.ClearDefault();
+                        detailControl.ClearDefault();
+                        tableControl.ClearDefault();
+                    }
+                }
+            }
+
+            INewDocumentAction newDocumentAction = GetInstance<INewDocumentAction>();
+            newDocumentAction.Execute();
+        }       
+
+        public void CashIn()
+        {
+           ICashInAction cashInAction = GetInstance<ICashInAction>();
+           cashInAction.SetOwnerForm(form);
+           cashInAction.Execute();
         }
+
+        
 
         public void CheckOut()
         {
-            //TODO Отбить чек, предварительно спросив ответ на действие
-            //После инициализируется новый чек
+            ICashInAction cashInAction = GetInstance<ICashInAction>();
+            if (!cashInAction.Status())
+            {
+                MessageBox.Show(this.form, "No money - no honey!", "No money?");
+                return;
+            }
+
+           INewDocumentAction newDocumentAction = GetInstance<INewDocumentAction>();
+           if (newDocumentAction.GetDocument() == null)
+           {
+               MessageBox.Show(this.form, "Money for air!? it is iniquity.", "Wtf?");
+               return;
+           }
+
+            ICheckoutAction checkOutAction = GetInstance<ICheckoutAction>();
+            checkOutAction.Execute();                     
         }
 
         public void Print()
@@ -46,12 +105,7 @@ namespace Retail.Main
             //TODO Печатать на принтере копию чека
         }
 
-        public void Search()
-        {
-            //TODO Открыть окно поиска и подбора товаров для чека
-        }
-
-
+    
         public void OpenBox()
         {
             //TODO Открыть ящик на кассе
@@ -67,6 +121,15 @@ namespace Retail.Main
             //TODO Печать Z-Отчета
         }
 
+        public User GetCurrentUser()
+        {
+            return null;
+        }
 
+
+        public void Search()
+        {
+           
+        }
     }
 }

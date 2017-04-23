@@ -22,9 +22,14 @@ namespace Retail.UI.Controls
             
         }
 
-        protected override UIElement getWPFControl()
+        protected override UIElement GetWPFControl()
         {
             return new Wpf.DetailControl();
+        }
+
+        public void ClearDefault()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

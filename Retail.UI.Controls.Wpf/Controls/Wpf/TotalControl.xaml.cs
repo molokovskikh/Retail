@@ -37,5 +37,32 @@ namespace Retail.UI.Controls.Wpf
         {
             throw new NotImplementedException();
         }
+
+
+        public decimal GetTotal()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowOddMoney(decimal cashIn)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetDocument(Models.Document document)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ClearDefault()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public decimal GetCashIn()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

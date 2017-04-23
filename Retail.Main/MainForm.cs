@@ -14,18 +14,16 @@ using Retail.UI.Controls;
 using Autofac;
 using System.Diagnostics;
 using Retail.Models;
+using Retail.UI.Actions;
 
 namespace Retail.Main
 {
-    public partial class CashForm : Form
+    public partial class MainForm : Form
     {
         #region Autowiring
 
-        public ICash cash { get; set; }
-        public IBarScanner barScanner { get; set; }
-        public IDisplayCustomer displayCustomer { get; set; }
-        public IProductRepository productRepository { get; set; }
-        public IDocumentRepository documentRepository { get; set; }
+        public IAddAmountAction addAmountAction { get; set; }
+
         public IShortcutKeyManager shortcutKeyManager { get; set; }
 
        
@@ -42,15 +40,15 @@ namespace Retail.Main
 
 
 
-        public CashForm()
+        public MainForm()
         {               
             //Поставим обработчик на создание окна в Runtime
             if (!DesignMode)
             {
                 this.HandleCreated += (s, o) =>
                     {
-                        RuntimeInitializeComponent();
-                        fillTestDataProducts();
+                        RuntimeInitializeComponent();                        
+                      //  fillTestDataProducts();
                     };
                 return;
             }
@@ -77,12 +75,38 @@ namespace Retail.Main
           
             this.KeyPreview = true;
             this.KeyDown+=(s,e)=>
+            {
+                if (e.KeyData == Keys.Escape)
                 {
-                    if (e.KeyData == Keys.Escape)
-                        this.tableControl1.Focus();
-                       
-                    shortcutKeyManager.Handle(e.KeyCode,e.Modifiers);
-                };
+                    this.tableControl1.Focus();
+                    return;
+                }
+
+                if (e.KeyData == Keys.Enter)
+                {
+                    this.addAmountAction.Execute();
+                    return;
+                }
+
+
+                if (e.KeyData == Keys.Delete)
+                {                    
+                    if (this.tableControl1.GetAmountOfSelectedProduct()>0 && 
+                        MessageBox.Show(this, "Вы действительно хотите удалить позицию из чека?", "Подтверждение действия", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        this.tableControl1.DelProduct(null);
+                    return;
+                }
+                
+                shortcutKeyManager.Handle(e.KeyCode, e.Modifiers);               
+            };
+
+            this.KeyPress += (s,e) =>
+            {                
+                if (char.IsLetterOrDigit(e.KeyChar))
+                {                    
+                    this.inputControl.AddChar(e.KeyChar);
+                }
+            };
 
             ///При редактировании в дизайнере скопируйте весь код автоматически сгенерированный в дизайнере в место начиная со следующей строки 
 
@@ -95,9 +119,8 @@ namespace Retail.Main
             this.buttonsControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.buttonsControl1.Location = new System.Drawing.Point(2, 506);
             this.buttonsControl1.Name = "buttonsControl1";
-            this.buttonsControl1.Size = new System.Drawing.Size(875, 63);
-            this.buttonsControl1.TabIndex = 3;
-            this.buttonsControl1.TabStop = true;
+            this.buttonsControl1.Size = new System.Drawing.Size(1022, 63);
+            this.buttonsControl1.TabIndex = 2;
             // 
             // statusControl1
             // 
@@ -106,7 +129,7 @@ namespace Retail.Main
             this.statusControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.statusControl1.Location = new System.Drawing.Point(2, 572);
             this.statusControl1.Name = "statusControl1";
-            this.statusControl1.Size = new System.Drawing.Size(875, 33);
+            this.statusControl1.Size = new System.Drawing.Size(1022, 33);
             this.statusControl1.TabIndex = 0;
             this.statusControl1.TabStop = false;
             // 
@@ -117,7 +140,7 @@ namespace Retail.Main
             this.totalControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.totalControl1.Location = new System.Drawing.Point(2, 382);
             this.totalControl1.Name = "totalControl1";
-            this.totalControl1.Size = new System.Drawing.Size(875, 120);
+            this.totalControl1.Size = new System.Drawing.Size(1022, 120);
             this.totalControl1.TabIndex = 0;
             this.totalControl1.TabStop = false;
             // 
@@ -129,7 +152,7 @@ namespace Retail.Main
             this.inputControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.inputControl1.Location = new System.Drawing.Point(2, 331);
             this.inputControl1.Name = "inputControl1";
-            this.inputControl1.Size = new System.Drawing.Size(875, 50);
+            this.inputControl1.Size = new System.Drawing.Size(1027, 50);
             this.inputControl1.TabIndex = 2;
             // 
             // detailControl1
@@ -139,7 +162,7 @@ namespace Retail.Main
             this.detailControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.detailControl1.Location = new System.Drawing.Point(2, 253);
             this.detailControl1.Name = "detailControl1";
-            this.detailControl1.Size = new System.Drawing.Size(875, 74);
+            this.detailControl1.Size = new System.Drawing.Size(1022, 74);
             this.detailControl1.TabIndex = 0;
             this.detailControl1.TabStop = false;
             // 
@@ -151,7 +174,7 @@ namespace Retail.Main
             this.tableControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tableControl1.Location = new System.Drawing.Point(2, 39);
             this.tableControl1.Name = "tableControl1";
-            this.tableControl1.Size = new System.Drawing.Size(875, 211);
+            this.tableControl1.Size = new System.Drawing.Size(1022, 211);
             this.tableControl1.TabIndex = 1;
             // 
             // captionControl1
@@ -161,14 +184,15 @@ namespace Retail.Main
             this.captionControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.captionControl1.Location = new System.Drawing.Point(2, 1);
             this.captionControl1.Name = "captionControl1";
-            this.captionControl1.Size = new System.Drawing.Size(875, 35);
+            this.captionControl1.Size = new System.Drawing.Size(1022, 35);
             this.captionControl1.TabIndex = 0;
+            this.captionControl1.TabStop = false;
             // 
-            // CashForm
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(879, 607);
+            this.ClientSize = new System.Drawing.Size(1026, 607);
             this.Controls.Add(this.buttonsControl1);
             this.Controls.Add(this.statusControl1);
             this.Controls.Add(this.totalControl1);
@@ -177,11 +201,13 @@ namespace Retail.Main
             this.Controls.Add(this.tableControl1);
             this.Controls.Add(this.captionControl1);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "CashForm";
+         //   this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
+            this.MinimumSize = new System.Drawing.Size(1024, 605);
+            this.Name = "MainForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Касса";
-            this.TopMost = true;
+         //   this.TopMost = true;
             this.Load += new System.EventHandler(this.CashForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -191,7 +217,7 @@ namespace Retail.Main
        
         private void CashForm_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+        //    this.WindowState = FormWindowState.Maximized;
         }
 
         /// <summary>
@@ -226,7 +252,7 @@ namespace Retail.Main
                     Classifier = new Classifier() { Id = id, Name = @"Мороженное ""Пальчики оближешь""" },
                     Price = 54.25m
                 },
-                234m
+                14m
             );
         } 
     }
