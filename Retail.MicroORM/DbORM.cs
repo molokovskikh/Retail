@@ -352,7 +352,7 @@ namespace Retail.MicroORM
                 {
                     if (_entity == null) continue;
                     int key = _getKeyTableEntity(_entity);
-                    InsertOrUpdateOrDeleteTemplate =
+                    string queryText =
                         string.IsNullOrEmpty(InsertOrUpdateOrDeleteTemplate) ?
                         (
                         key > 0 ?
@@ -362,7 +362,7 @@ namespace Retail.MicroORM
                         ApplyTemplate(InsertOrUpdateOrDeleteTemplate,_entity);
 
                     //Если текст запроса пустой то сгенерируем его
-                    cmd.CommandText = InsertOrUpdateOrDeleteTemplate;
+                    cmd.CommandText = queryText;
                      int _RowAffected =cmd.ExecuteNonQuery();
 
                     //Если обновление или вставка
